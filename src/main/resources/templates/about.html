@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>About</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="" />
+
+    <!-- Facebook and Twitter integration -->
+    <meta property="og:title" content=""/>
+    <meta property="og:image" content=""/>
+    <meta property="og:url" content=""/>
+    <meta property="og:site_name" content=""/>
+    <meta property="og:description" content=""/>
+    <meta name="twitter:title" content="" />
+    <meta name="twitter:image" content="" />
+    <meta name="twitter:url" content="" />
+    <meta name="twitter:card" content="" />
+
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+    <link rel="stylesheet" th:href="@{/css/animate.css}">
+    <link rel="stylesheet" th:href="@{/css/icomoon.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/css/magnific-popup.css}">
+    <link rel="stylesheet" th:href="@{/css/flexslider.css}">
+    <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
+    <link rel="stylesheet" th:href="@{/css/owl.theme.default.min.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap-datepicker.css}">
+    <link rel="stylesheet" th:href="@{/fonts/flaticon/font/flaticon.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <script th:src="@{/js/modernizr-2.6.2.min.js}"></script>
+    <script th:src="@{/js/respond.min.js}"></script>
+</head>
+<body>
+<div id="page">
+    <div th:replace="fragment/header :: header_info (vm=${vm.getLayoutHeaderVM()})"></div>
+
+    <div id="colorlib-about">
+        <div class="container">
+            <div class="row">
+                <div class="about-flex">
+                    <div class="col-one-forth aside-stretch animate-box">
+                        <div class="row">
+                            <div class="col-md-12 about">
+                                <h2>Giới Thiệu</h2>
+
+                                <ul>
+                                    <li><a href="#">Lịch Sử</a></li>
+                                    <li><a href="#">Nhân Viên</a></li>
+                                    <li><a href="#">Liên Hệ</a></li>
+                                    <li><a th:href="${'/product'}">Của Hàng</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-three-forth animate-box">
+                        <h2>Lịch Sử</h2>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p><b>2011-2013:</b> Bắt đầu kinh doanh nội thất với quy mô nhỏ, phục vụ các cá nhận có , doanh nghiệp vừa và nhỏ với phân khúc trung bình tại Hà Nội.</p>
+
+                                <p>Là doanh nghiệp đầu tiên định vị thương hiệu: Giải pháp nội thất cho các doanh nghiệp vừa và nhỏ.</p>
+
+                                <p><b>2013-2016:</b> Thành lập nhà máy sản xuất bàn, tủ theo tiêu chuẩn chất lượng cao, phân phối sản phẩm cho hơn 10 đợn vị kinh doanh nội thất.</p>
+
+                                <p><b>2016-nay:</b> Chính thức thành lập thương hiệu nội thất Furniture, chuyển hướng tập chung phát triển các sản phẩm cao cấp. Đánh dấu bước phát triển chuyên nghiệp hơn, doanh thu tăng đột phá với quy mô tăng lên nhanh chóng, mở rộng nhà máy, xưởng sản xuất.</p>
+
+                                <div class="row row-pb-sm">
+                                    <div class="col-md-6">
+                                        <img class="img-responsive" src="https://cdn.24h.com.vn/upload/2-2019/images/2019-05-14/dieu-gi-lam-nen-suc-hut-cho-noi-that-theo-phong-cach-tan-co-dien-nha-dep-1-1557820186-22-width600height450.jpg" alt="">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>Với bề dày 10 năm kinh nghiệm trong lĩnh vực nội thất, năng lực và thái độ đội ngũ thợ luôn được nâng cao, công nghệ sản xuất hiện đại, thương hiệu Furniture đang ngày càng được khách hàng tin tưởng lựa chọn.</p>
+                                        <p>Furniture trân trọng mọi ý kiến đóng góp, đánh giá của khách hàng về sản phẩm và dịch vụ của chúng tôi ngày càng được hoàn thiện hơn.</p>
+                                        <p>Furniture trân trọng mọi ý kiến đóng góp, đánh giá của khách hàng về sản phẩm và dịch vụ của chúng tôi ngày càng được hoàn thiện hơn.</p>
+                                    </div>
+                                </div>
+
+
+                                <p>Furniture mong muốn sẽ được đồng hành cùng khách hàng trong suốt trạng đường phát triển của mình. Chúng tôi tin rằng, khách hàng chắc chắn sẽ lựa chọn được những sản phẩm phù hợp và tiện lợi nhất cho ngôi nhà của mình.</p>
+
+                                <p>Sử dụng nội thất Furniture đảm bảo được ứng dụng dây chuyền công nghệ hiện đại, vật kiệu thân thiện với môi trường, an toàn cho sức khỏe người dùng. Đồ dùng nôi thất thiết kế đạt chuẩn, khả năng chịu lực và chống bào mòn tốt hơn, đảm bảo không bị han gỉ, chịu được áp lực tiêu cực của thời thiết.</p>
+
+                                <p>Quý khách hàng mua tìm sản phẩm Furniture tại showroom để đảm bảo chất lượng cao, hàng chính hãng 100%. Furniture cam kết sản phâm nội thất cao cấp, giá cả ưu đãi, bảo hành lâu dài, luôn đặt cao lợi ích của khách hàng.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="fragment/footer :: footer_info"></div>
+</div>
+
+<div class="gototop js-top">
+    <a href="#" class="js-gotop"><i class="icon-arrow-up2"></i></a>
+</div>
+
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/jquery.easing.1.3.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/jquery.waypoints.min.js}"></script>
+<script th:src="@{/js/jquery.flexslider-min.js}"></script>
+<script th:src="@{/js/owl.carousel.min.js}"></script>
+<script th:src="@{/js/jquery.magnific-popup.min.js}"></script>
+<script th:src="@{/js/magnific-popup-options.js}"></script>
+<script th:src="@{/js/bootstrap-datepicker.js}"></script>
+<script th:src="@{/js/jquery.stellar.min.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>

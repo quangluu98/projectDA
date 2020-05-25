@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+    <link rel="stylesheet" th:href="@{/css/animate.css}">
+    <link rel="stylesheet" th:href="@{/css/icomoon.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/css/magnific-popup.css}">
+    <link rel="stylesheet" th:href="@{/css/flexslider.css}">
+    <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
+    <link rel="stylesheet" th:href="@{/css/owl.theme.default.min.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap-datepicker.css}">
+    <link rel="stylesheet" th:href="@{/fonts/flaticon/font/flaticon.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <script th:src="@{/js/modernizr-2.6.2.min.js}"></script>
+
+    <link rel="stylesheet" th:href="@{/detail/detail.css}">
+    <link rel="stylesheet" th:href="@{/detail/jquery.exzoom.css}">
+
+    <title>Product-Detail</title>
+</head>
+<body>
+<div class="colorlib-loader"></div>
+<div id="page">
+    <div th:replace="fragment/header :: header_info (vm=${vm.getLayoutHeaderVM()})"></div>
+</div>
+<div class="product-detail container" style="margin-left: 200px; margin-top: 50px">
+    <div class="clearfix">
+        <div class="col col-40">
+            <div class="content">
+                <div class="image-product">
+                    <div class="exzoom" id="exzoom">
+                        <div class="exzoom_img_box">
+                            <ul class='exzoom_img_ul'>
+                                <th:block th:each="image : ${vm.getProductVM().getProductImageVMS()}">
+                                    <li><img th:src="${image.getLink()}"></li>
+                                </th:block>
+                            </ul>
+                        </div>
+                        <div class="exzoom_nav"></div>
+                        <p class="exzoom_btn">
+                            <a href="javascript:void(0);" class="exzoom_prev_btn"><i class="fas fa-angle-left"></i></a>
+                            <a href="javascript:void(0);" class="exzoom_next_btn"><i class="fas fa-angle-right"></i></a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col col-60 info-detail">
+            <div class="content">
+                <div class="col-md-8">
+                    <h2 style="margin-bottom:30px;" th:text="${vm.getProductVM().getName()}"></h2>
+
+                    <p th:text="'Thuộc nhóm: ' + ${vm.getProductVM().getCategoryName()}"></p>
+                    <p th:text="${vm.getProductVM().getShortDesc()}"></p>
+                    <h4>
+                        <strong th:text="'Giá: ' + ${vm.getProductVM().getPrice()} + ' VNĐ '"></strong>
+                    </h4>
+
+                    <div class="amount">
+                        <div class="quantity">
+                            <span>Số lượng:</span>
+                            <button class="plus-btn btn-amout" type="button" name="button">+</button>
+                            <input id="getAmount" style="height: 27px" type="text" name="name" value="1">
+                            <button class="minus-btn btn-amout" type="button" name="button">-</button>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="fb-like" data-href="" data-layout="standard" data-action="like" data-size="large" data-show-faces="true" data-share="true" style="margin-top:20px"></div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="fb-comments" data-href="" data-numposts="5"></div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <a th:attr="data-product=${vm.getProductVM().getId()}" class="add-to-cart btn btn-primary" style="color: black">
+                        <span style="color: black; margin-right: 10px" class="glyphicon glyphicon-shopping-cart"></span>Thêm vào giỏ hàng
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!--    <div id="colorlib-subscribe" data-stellar-background-ratio="0.5" style="background-color: rgba(255,255,255,0.15); padding: 20px 0; margin-left: 20px">-->
+<!--        <div class="row">-->
+<!--            <form class="form-inline qbstp-header-subscribe">-->
+<!--                <div class="row">-->
+<!--                    <div class="col-md-12 col-md-offset-0">-->
+<!--                        <p style="color: black; font-weight: bold; font-size: 20px">Nhận xét: </p>-->
+<!--                        <div class="form-group">-->
+<!--                            <input type="text" class="form-control" id="key-word" placeholder="Bạn thấy sao về sản phẩm này?">-->
+<!--                            <button type="button" th:attr="data-product=${vm.getProductVM().getId()}" style="color: black" class="btn btn-primary add-comment">Phản hồi</button>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--    <th:block th:each=" cmt : ${vm.getCommentVMList()}">-->
+<!--        <div id="colorlib-blog" style="padding: 20px 0; margin-top: -30px; margin-left: 50px; margin-bottom: -70px">-->
+<!--            <div class="blog-flex">-->
+<!--                <div class="blog-entry aside-stretch-right" style="padding: 20px 0">-->
+<!--                    <img th:src="${cmt.getAvatar()}" alt="" style="height: 50px; width: 50px; border-radius: 30px">-->
+<!--                    <a href="#" class="blog-post" style="margin-top: -50px">-->
+<!--                        <div class="desc" style="margin-left: -30px">-->
+<!--                            <span class="cat" th:text="${cmt.getUsername()} + ' - '"></span>-->
+<!--                            <span class="date" th:text="${cmt.getCreatedDate()}"></span>-->
+<!--                            <span th:if="${cmt.getRoleId() == 1} or ${cmt.getRoleId() == 3}" style="border: 1px solid #FFDD00; background-color: #FFDD00; border-radius: 20px; padding: 0 3px">Quản trị viên</span>-->
+<!--                            <h4 th:text="${cmt.getContent()}"></h4>-->
+<!--                        </div>-->
+<!--                    </a>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </th:block>-->
+</div>
+<div id="page">
+    <div id="colorlib-hotel">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 text-center colorlib-heading">
+                    <h2>Sản phẩm liên quan</h2>
+                    <p>Sử dụng những nguyện liệu cao cấp, Sufee đã thiết kế và thi công một căn nhà biệt thự với cả nội thất và ngoại thất tiểu cảnh sân vườn với phong cách hiện đại phù hợp với kiến trúc Việt Nam.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="owl-carousel">
+                        <th:block th:each="item : ${vm.getProductVMS()}">
+                            <div class="item">
+                                <div class="hotel-entry">
+                                    <a th:href="${'/product/detail/' + item.getId()}" class="hotel-img" >
+                                        <img style="height: 280px" th:src="${item.getMainImage()}" alt="">
+                                        <p class="price"><span th:text="${item.getPrice()} + ' VNĐ'"></span></p>
+                                    </a>
+                                    <div class="desc">
+                                        <h3><a th:href="${'/product/detail/' + item.getId()}" th:text="${item.getName()}"></a></h3>
+                                        <span class="place" th:text="${item.getCategoryName()}"></span>
+                                        <b th:text="${item.getShortDesc()}"></b>
+                                    </div>
+                                </div>
+                            </div>
+                        </th:block>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="page">
+    <div th:replace="fragment/footer :: footer_info"></div>
+</div>
+
+
+<div class="gototop js-top">
+    <a href="#" class="js-gotop"><i class="icon-arrow-up2"></i></a>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.9.0/sweetalert2.all.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.0/js/all.min.js "></script>
+
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/jquery.easing.1.3.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/jquery.waypoints.min.js}"></script>
+<script th:src="@{/js/jquery.flexslider-min.js}"></script>
+<script th:src="@{/js/owl.carousel.min.js}"></script>
+<script th:src="@{/js/jquery.magnific-popup.min.js}"></script>
+<script th:src="@{/js/magnific-popup-options.js}"></script>
+<script th:src="@{/js/bootstrap-datepicker.js}"></script>
+<script th:src="@{/js/jquery.stellar.min.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+<script th:src="@{/detail/detail.js}"></script>
+<script th:src="@{/detail/jquery.exzoom.js}"></script>
+<script th:src="@{/js/add-to-cart.js}"></script>
+<script th:src="@{/js/comment.js}"></script>
+</body>
+</html>

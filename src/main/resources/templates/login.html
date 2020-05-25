@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" th:href="@{/content/images/icons/favicon.ico}"/>
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{/content/vendor/bootstrap/css/bootstrap.min.css}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{/content/fonts/font-awesome-4.7.0/css/font-awesome.min.css}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{/content/fonts/iconic/css/material-design-iconic-font.min.css}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{/content/vendor/animate/animate.css}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{/content/vendor/css-hamburgers/hamburgers.min.css}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{/content/vendor/animsition/css/animsition.min.css}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{/content/vendor/select2/select2.min.css}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{/content/vendor/daterangepicker/daterangepicker.css}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{/content/css/util.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/content/css/main.css}">
+    <!--===============================================================================================-->
+</head>
+<body >
+
+<div class="limiter">
+    <div class="container-login100" >
+        <div class="wrap-login100"  >
+            <form class="login100-form validate-form" th:action="@{/login}" method="post">
+                <span class="login100-form-title p-b-26" style="margin-top: -58px">
+                    Welcome
+                </span>
+                <span class="login100-form-title p-b-48" style="margin-top: -30px">
+                    <img src="https://png.pngtree.com/template/20190910/ourlarge/pngtree-furniture-logo-design-template-symbol-and-icon-of-chairs-sofas-tables-image_305364.jpg" width="150" height="150" >
+                </span>
+
+                <div style="margin-top: -30px" th:if="${param.error}">
+                    <div class="form-alert-fail" >
+                        Tên người dùng hoặc mật khẩu không hợp lệ.
+                    </div>
+                </div>
+                <div style="margin-top: -30px" th:if="${param.logout}">
+                    <div class="form alert-success">
+                        Bạn đã được đăng xuất.
+                    </div>
+                </div>
+
+
+                <div class="wrap-input100 validate-input" data-validate = "Nhập tên đăng nhập">
+                    <input class="input100" type="text" name="username">
+                    <span class="focus-input100" data-placeholder="Tên đăng nhập"></span>
+                </div>
+
+                <div class="wrap-input100 validate-input" data-validate="Nhập mật khẩu">
+						<span class="btn-show-pass">
+							<i class="zmdi zmdi-eye"></i>
+						</span>
+                    <input class="input100" type="password" name="password">
+                    <span class="focus-input100" data-placeholder="Mật khẩu"></span>
+                </div>
+
+                <label>
+                    <input type="checkbox" name="remember-me" id="remember-me"> Nhớ Mật Khẩu
+                </label>
+
+                <div class="container-login100-form-btn">
+                    <div class="wrap-login100-form-btn">
+                        <div class="login100-form-bgbtn"></div>
+                        <button style="font-family: Arial;" class="login100-form-btn">
+                            Đăng Nhập
+                        </button>
+                    </div>
+                </div>
+
+                <div style="margin-top: -80px" class="text-center p-t-115">
+						<span class="txt1">
+							Chưa có tài khoản?
+						</span>
+
+                    <a class="txt2" th:href="@{/register}">
+                        Đăng kí
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div id="dropDownSelect1"></div>
+
+<!--===============================================================================================-->
+<script th:src="@{/content/vendor/jquery/jquery-3.2.1.min.js}"></script>
+<!--===============================================================================================-->
+<script th:src="@{/content/vendor/animsition/js/animsition.min.js}"></script>
+<!--===============================================================================================-->
+<script th:src="@{/content/vendor/bootstrap/js/popper.js}"></script>
+<script th:src="@{/content/vendor/bootstrap/js/bootstrap.min.js}"></script>
+<!--===============================================================================================-->
+<script th:src="@{/content/vendor/select2/select2.min.js}"></script>
+<!--===============================================================================================-->
+<script th:src="@{/content/vendor/daterangepicker/moment.min.js}"></script>
+<script th:src="@{/content/vendor/daterangepicker/daterangepicker.js}"></script>
+<!--===============================================================================================-->
+<script th:src="@{/content/vendor/countdowntime/countdowntime.js}"></script>
+<!--===============================================================================================-->
+<script th:src="@{/content/js/main.js}"></script>
+
+</body>
+</html>

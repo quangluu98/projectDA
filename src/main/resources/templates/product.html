@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Product</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="" />
+
+    <!-- Facebook and Twitter integration -->
+    <meta property="og:title" content=""/>
+    <meta property="og:image" content=""/>
+    <meta property="og:url" content=""/>
+    <meta property="og:site_name" content=""/>
+    <meta property="og:description" content=""/>
+    <meta name="twitter:title" content="" />
+    <meta name="twitter:image" content="" />
+    <meta name="twitter:url" content="" />
+    <meta name="twitter:card" content="" />
+
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+    <link rel="stylesheet" th:href="@{/css/animate.css}">
+    <link rel="stylesheet" th:href="@{/css/icomoon.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/css/magnific-popup.css}">
+    <link rel="stylesheet" th:href="@{/css/flexslider.css}">
+    <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
+    <link rel="stylesheet" th:href="@{/css/owl.theme.default.min.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap-datepicker.css}">
+    <link rel="stylesheet" th:href="@{/fonts/flaticon/font/flaticon.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <script th:src="@{/js/modernizr-2.6.2.min.js}"></script>
+    <script th:src="@{/js/respond.min.js}"></script>
+</head>
+<body>
+<div class="colorlib-loader"></div>
+<div id="page">
+    <div th:replace="fragment/header :: header_info (vm=${vm.getLayoutHeaderVM()})"></div>
+
+    <div id="colorlib-reservation">
+        <div class="container">
+            <div class="row">
+                <div class="search-wrap">
+                    <div class="container">
+                        <ul class="nav nav-tabs">
+                            <li><a th:href="${'/product'}">Tất cả</a></li>
+                            <th:block th:each="category : ${vm.getCategoryVMS()}">
+                                <li><a th:href="${'/product/?categoryId=' + category.getId()}"
+                                       th:text="${category.getName()}">
+                                </a></li>
+                            </th:block>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="colorlib-subscribe"  data-stellar-background-ratio="0.5" style="background-color: #fafafa; margin-bottom: -40px; padding: 40px 0">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1 text-center colorlib-heading animate-box">
+                    <form class="form-inline qbstp-header-subscribe" th:action="@{'/product'}" th:object="${productName}" method="get">
+                        <div class="row">
+                            <div class="col-md-12 col-md-offset-0">
+                                <div class="form-group">
+                                    <input th:field="*{name}" type="text" class="form-control" id="key-word" placeholder="Nhập từ khóa tìm kiêm">
+                                    <button style="color: black" type="submit" class="btn btn-primary">Tìm Kiếm</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="colorlib-tour colorlib-light-grey" style="margin-top: -70px">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 text-center colorlib-heading animate-box">
+                    <h2 th:text="${vm.getKeyWord()}"></h2>
+                    <p style="margin-left: -90px; color: black">Sắp xếp theo
+                        <a href="#tang" class="btn btn-primary" style="color: black" th:href="${'?'+(#httpServletRequest.getParameter('categoryId')==null?'':('&categoryId='+#httpServletRequest.getParameter('categoryId')))
+                                                                                       +(#httpServletRequest.getParameter('page')==null?'':('&page='+#httpServletRequest.getParameter('page')))
+                                                                                       +(#httpServletRequest.getParameter('size')==null?'':('&size='+#httpServletRequest.getParameter('size')))
+                                                                                       +(#httpServletRequest.getParameter('startPrice')==null?'':('&startPrice='+#httpServletRequest.getParameter('startPrice')))
+                                                                                       +(#httpServletRequest.getParameter('endPrice')==null?'':('&endPrice='+#httpServletRequest.getParameter('endPrice')))
+                                                                                       +(#httpServletRequest.getParameter('lessPrice')==null?'':('&lessPrice='+#httpServletRequest.getParameter('lessPrice')))
+                                                                                       +(#httpServletRequest.getParameter('greatPrice')==null?'':('&greatPrice='+#httpServletRequest.getParameter('greatPrice')))
+                                                                                       +('&sortByPrice=ASC')
+                                                                                       +(#httpServletRequest.getParameter('name')==null?'':('&name='+#httpServletRequest.getParameter('name')))}">Giá tăng dần</a>
+                        <a href="#giam" class="btn btn-primary" style="color: black" th:href="${'?'+(#httpServletRequest.getParameter('categoryId')==null?'':('&categoryId='+#httpServletRequest.getParameter('categoryId')))
+                                                                                       +(#httpServletRequest.getParameter('page')==null?'':('&page='+#httpServletRequest.getParameter('page')))
+                                                                                       +(#httpServletRequest.getParameter('size')==null?'':('&size='+#httpServletRequest.getParameter('size')))
+                                                                                       +(#httpServletRequest.getParameter('startPrice')==null?'':('&startPrice='+#httpServletRequest.getParameter('startPrice')))
+                                                                                       +(#httpServletRequest.getParameter('endPrice')==null?'':('&endPrice='+#httpServletRequest.getParameter('endPrice')))
+                                                                                       +(#httpServletRequest.getParameter('lessPrice')==null?'':('&lessPrice='+#httpServletRequest.getParameter('lessPrice')))
+                                                                                       +(#httpServletRequest.getParameter('greatPrice')==null?'':('&greatPrice='+#httpServletRequest.getParameter('greatPrice')))
+                                                                                       +('&sortByPrice=DESC')
+                                                                                       +(#httpServletRequest.getParameter('name')==null?'':('&name='+#httpServletRequest.getParameter('name')))}">Giá giảm dần</a>
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-md-offset-3 text-center colorlib-heading animate-box" style="margin-top: -70px">
+                <p style="margin-left: -90px; color: black">Lọc theo giá
+                    <a href="#duoi" class="btn btn-primary" style="color: black" th:href="${'?'+(#httpServletRequest.getParameter('categoryId')==null?'':('&categoryId='+#httpServletRequest.getParameter('categoryId')))
+                                                                                       +(#httpServletRequest.getParameter('page')==null?'':('&page='+#httpServletRequest.getParameter('page')))
+                                                                                       +(#httpServletRequest.getParameter('size')==null?'':('&size='+#httpServletRequest.getParameter('size')))
+                                                                                       +('&lessPrice=8000000')
+                                                                                       +(#httpServletRequest.getParameter('name')==null?'':('&name='+#httpServletRequest.getParameter('name')))}">Dưới 8 triệu</a>
+                    <a href="#giua" class="btn btn-primary" style="color: black" th:href="${'?'+(#httpServletRequest.getParameter('categoryId')==null?'':('&categoryId='+#httpServletRequest.getParameter('categoryId')))
+                                                                                       +(#httpServletRequest.getParameter('page')==null?'':('&page='+#httpServletRequest.getParameter('page')))
+                                                                                       +(#httpServletRequest.getParameter('size')==null?'':('&size='+#httpServletRequest.getParameter('size')))
+                                                                                       +('&startPrice=9000000')
+                                                                                       +('&endPrice=15000000')
+                                                                                       +(#httpServletRequest.getParameter('name')==null?'':('&name='+#httpServletRequest.getParameter('name')))}">Từ 9-15 triệu</a>
+                    <a href="#tren" class="btn btn-primary" style="color: black" th:href="${'?'+(#httpServletRequest.getParameter('categoryId')==null?'':('&categoryId='+#httpServletRequest.getParameter('categoryId')))
+                                                                                       +(#httpServletRequest.getParameter('page')==null?'':('&page='+#httpServletRequest.getParameter('page')))
+                                                                                       +(#httpServletRequest.getParameter('size')==null?'':('&size='+#httpServletRequest.getParameter('size')))
+                                                                                       +('&greatPrice=16000000')
+                                                                                       +(#httpServletRequest.getParameter('name')==null?'':('&name='+#httpServletRequest.getParameter('name')))}">Trên 16 triệu</a>
+                </p>
+            </div>
+        </div>
+        <div class="tour-wrap" style="margin-top: -50px">
+            <th:block th:each="product : ${vm.getProductVMS()}">
+                <a th:href="${'/product/detail/' + product.getId()}" class="tour-entry animate-box">
+                    <div class="tour-img" >
+                        <img width="325px" height="250px"  th:src="${product.getMainImage()}" alt="">
+                    </div>
+                    <span class="desc">
+                            <h2 th:text="${product.getName()}"></h2>
+                            <span class="city" th:text="${product.getCategoryName()}"></span>
+                            <span class="price" th:text="${product.getPrice()} + ' VNĐ '"></span>
+                        </span>
+                </a>
+            </th:block>
+            <div class="row" th:if="${vm.getProductVMS().size()>0}">
+                <div class="col-md-12">
+                    <ul class="pagination" style="font-weight: bold">
+                        <th:block th:each="i : ${#numbers.sequence(0, page.totalPages - 1)}">
+                            <li th:if="${page.number == i}">
+                                <a th:href="${''}" th:text="${i+1}"></a>
+                            </li>
+                            <li th:unless="${page.number == i}">
+                                <a th:text="${i+1}" th:href="${'?'+(#httpServletRequest.getParameter('categoryId')==null?'':('&categoryId='+#httpServletRequest.getParameter('categoryId')))
+                                                                                       +('&page='+i)
+                                                                                       +(#httpServletRequest.getParameter('size')==null?'':('&size='+#httpServletRequest.getParameter('size')))
+                                                                                       +(#httpServletRequest.getParameter('startPrice')==null?'':('&startPrice='+#httpServletRequest.getParameter('startPrice')))
+                                                                                       +(#httpServletRequest.getParameter('endPrice')==null?'':('&endPrice='+#httpServletRequest.getParameter('endPrice')))
+                                                                                       +(#httpServletRequest.getParameter('lessPrice')==null?'':('&lessPrice='+#httpServletRequest.getParameter('lessPrice')))
+                                                                                       +(#httpServletRequest.getParameter('greatPrice')==null?'':('&greatPrice='+#httpServletRequest.getParameter('greatPrice')))
+                                                                                       +(#httpServletRequest.getParameter('sortByPrice')==null?'':('&sortByPrice='+#httpServletRequest.getParameter('sortByPrice')))
+                                                                                       +(#httpServletRequest.getParameter('name')==null?'':('&name='+#httpServletRequest.getParameter('name')))}"></a>
+                            </li>
+                        </th:block>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="fragment/footer :: footer_info"></div>
+</div>
+
+
+
+<div class="gototop js-top">
+    <a href="#" class="js-gotop"><i class="icon-arrow-up2"></i></a>
+</div>
+
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/jquery.easing.1.3.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/jquery.waypoints.min.js}"></script>
+<script th:src="@{/js/jquery.flexslider-min.js}"></script>
+<script th:src="@{/js/owl.carousel.min.js}"></script>
+<script th:src="@{/js/jquery.magnific-popup.min.js}"></script>
+<script th:src="@{/js/magnific-popup-options.js}"></script>
+<script th:src="@{/js/bootstrap-datepicker.js}"></script>
+<script th:src="@{/js/jquery.stellar.min.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>

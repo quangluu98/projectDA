@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div th:fragment="header_info (vm)">
+    <nav class="colorlib-nav" role="navigation">
+        <div class="top-menu">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xs-2">
+                        <div id="colorlib-logo"><a th:text="${vm.getLogo()}" href="#" style="font-size: 35px"></a></div>
+                    </div>
+                    <div sec:authorize="isAuthenticated()">
+                        <div class="col-xs-10 text-right menu-1">
+                            <ul>
+                                <li class="active"><a th:href="${'/'}" style="font-size: 20px" >Trang Chủ</a></li>
+                                <li>
+                                    <a th:href="${'/product'}" style="font-size: 20px">Cửa Hàng</a>
+                                </li>
+                                <li>
+                                    <a th:href="${'/news'}" style="font-size: 20px">Tin Tức</a>
+                                </li>
+                                <li>
+                                    <a th:href="@{/about}" style="font-size: 20px">Giới Thiệu</a>
+                                </li>
+                                <li class="has-dropdown">
+                                    <img th:src="${vm.getUser().getAvatar()}" style="width: 30px; height: 30px; border-radius: 30px" alt="">
+                                    <a th:inline="text" style="font-size: 20px; margin-left: -10px">[[${#httpServletRequest.remoteUser}]]</a>
+                                    <ul class="dropdown">
+                                        <li><a th:href="${'/order/history'}">Lịch sử</a></li>
+                                        <li><a th:href="${'/user/detail'}">Chi tiết</a></li>
+                                        <li><a th:href="@{/logout}">Đăng xuất</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a th:href="${'/point'}" style="font-size: 20px">Tích Điểm</a>
+                                </li>
+                                <li>
+                                    <a class="glyphicon glyphicon-shopping-cart" th:href="${'/cart'}" aria-hidden="true" style="font-size: 20px">
+                                    </a>
+                                    <span th:text="'[' + ${vm.getTotalProduct()}+ ']'" style="margin-left: -13px; font-size: 20px; color: rgba(255, 255, 255, 0.7);"></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div sec:authorize="isAnonymous()">
+                        <div class="col-xs-10 text-right menu-1">
+                            <ul>
+                                <li class="active"><a th:href="${'/'}" style="font-size: 20px" >Trang Chủ</a></li>
+                                <li>
+                                    <a th:href="${'/product'}" style="font-size: 20px">Cửa Hàng</a>
+                                </li>
+                                <li>
+                                    <a th:href="${'/news'}" style="font-size: 20px">Tin Tức</a>
+                                </li>
+                                <li>
+                                    <a th:href="@{/about}" style="font-size: 20px">Giới Thiệu</a>
+                                </li>
+                                <li class="has-dropdown">
+                                    <a style="font-size: 20px; margin-left: -10px">Đăng nhập</a>
+                                    <ul class="dropdown">
+                                        <li><a th:href="${'/order/history'}">Lịch sử</a></li>
+                                        <li><a th:href="@{/login}">Đăng nhập</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a th:href="${'/point'}" style="font-size: 20px">Tích Điểm</a>
+                                </li>
+                                <li>
+                                    <a class="glyphicon glyphicon-shopping-cart" th:href="${'/cart'}" aria-hidden="true" style="font-size: 20px">
+                                    </a>
+                                    <span th:text="'[' + ${vm.getTotalProduct()}+ ']'" style="margin-left: -13px; font-size: 20px; color: rgba(255, 255, 255, 0.7);"></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <aside id="colorlib-hero">
+        <div class="flexslider">
+            <ul class="slides">
+                <li style="background-image: url(https://donggia.vn/wp-content/uploads/2017/10/thiet-ke-noi-that-phong-khach-chung-cu-tuyet-dep-3.jpg);">
+                    <div class="overlay"></div>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-6 col-md-offset-3 col-sm-12 col-xs-12 slider-text">
+                                <div class="slider-text-inner text-center">
+                                    <h2></h2>
+                                    <h1>Hiện Đại</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li style="background-image: url(https://noithattoancau.vn/uploads/images/thiet-ke-noi-that-01-225-.jpg);">
+                    <div class="overlay"></div>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-6 col-md-offset-3 col-sm-12 col-xs-12 slider-text">
+                                <div class="slider-text-inner text-center">
+                                    <h2></h2>
+                                    <h1>Phong Cách</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li style="background-image: url(http://noithatanhung.vn/uploads/images/san-pham/sofa-go/47/ban-ghe-sofa-go-nho-2.jpg);">
+                    <div class="overlay"></div>
+                    <div class="container-fluids">
+                        <div class="row">
+                            <div class="col-md-6 col-md-offset-3 col-sm-12 col-xs-12 slider-text">
+                                <div class="slider-text-inner text-center">
+                                    <h2></h2>
+                                    <h1>Thời Thượng</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li style="background-image: url(http://noithatvincen.com/public/images/tintuc/toi-da-hoa-khong-gian-qua-thiet-ke-noi-that-thong-minh-1213_background.jpg);">
+                    <div class="overlay"></div>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-6 col-md-offset-3 col-sm-12 col-xs-12 slider-text">
+                                <div class="slider-text-inner text-center">
+                                    <h2></h2>
+                                    <h1>Cao Cấp</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </aside>
+</div>
+</body>
+</html>

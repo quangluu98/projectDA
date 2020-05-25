@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>News Admin</title>
+    <meta name="description" content="Sufee Admin - HTML5 Admin Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- <link rel="apple-touch-icon" href="apple-icon.png"> -->
+    <!-- <link rel="shortcut icon" href="favicon.ico"> -->
+
+    <link rel="stylesheet" th:href="@{/vendors/bootstrap/dist/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/vendors/font-awesome/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/vendors/themify-icons/css/themify-icons.css}">
+    <link rel="stylesheet" th:href="@{/vendors/flag-icon-css/css/flag-icon.min.css}">
+    <link rel="stylesheet" th:href="@{/vendors/selectFX/css/cs-skin-elastic.css}">
+    <link rel="stylesheet" th:href="@{/vendors/jqvmap/dist/jqvmap.min.css}">
+
+
+    <link rel="stylesheet" th:href="@{/assets/css/style.css}">
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body>
+
+
+<!-- Left Panel -->
+
+<aside id="left-panel" class="left-panel">
+    <nav class="navbar navbar-expand-sm navbar-default">
+
+        <div class="navbar-header">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fa fa-bars"></i>
+            </button>
+            <a class="navbar-brand" href=""><img th:src="@{/images/logo.png}" alt="Logo"></a>
+            <a class="navbar-brand hidden" href=""><img th:src="@{/images/logo2.png}" alt="Logo"></a>
+        </div>
+
+        <div id="main-menu" class="main-menu collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active">
+                    <a th:href="${'/admin'}"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
+                </li>
+                <h3 class="menu-title">Quản lý dữ liệu</h3><!-- /.menu-title -->
+                <li class="menu-item-has-children dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Quản lý</a>
+                    <ul class="sub-menu children dropdown-menu">
+                        <li th:if="${vm.getRoleId() == 1} or ${vm.getRoleId() == 3}"><i class="fa fa-list-alt"></i><a th:href="${'/admin/product'}">Sản phẩm</a></li>
+                        <li th:if="${vm.getRoleId() == 1} or ${vm.getRoleId() == 3}"><i class="fa fa-list"></i><a th:href="${'/admin/category'}">Danh mục</a></li>
+                        <li th:if="${vm.getRoleId() == 1} or ${vm.getRoleId() == 3}"><i class="fa fa-newspaper-o"></i><a th:href="${'/admin/news'}">Tin tức</a></li>
+                        <li><i class="fa fa-sticky-note"></i><a th:href="${'/admin/order'}">Hóa đơn</a></li>
+                        <li th:if="${vm.getRoleId() == 4}"><i class="fa fa-sticky-note"></i><a th:href="${'/admin/order/shipper'}">Đơn hàng của tôi</a></li>
+                        <li th:if="${vm.getRoleId() == 1}"><i class="fa fa-user"></i><a th:href="${'/admin/user/'}">Người dùng</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a th:if="${vm.getRoleId() == 1}" th:href="${'/admin/chart'}"> <i class="menu-icon fa fa-bar-chart"></i>Biểu đồ </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</aside><!-- /#left-panel -->
+
+<!-- Left Panel -->
+
+<!-- Right Panel -->
+
+<div id="right-panel" class="right-panel">
+
+    <!-- Header-->
+    <header id="header" class="header">
+
+        <div class="header-menu">
+
+            <div class="col-sm-7">
+                <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>
+                <div class="header-left">
+                    <button class="search-trigger" ><i class="fa fa-search" ></i></button>
+                    <div class="form-inline">
+                        <form class="search-form" th:action="@{'/admin/news'}" th:object="${title}" method="get">
+                            <input th:field="*{title}" class="form-control mr-sm-2" type="text" placeholder="Nhập từ khóa tìm kiếm ..." aria-label="Search">
+                            <button type="submit"><i class="fa fa-close"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-5">
+                <div class="language-select dropdown" id="language-select">
+                    <a style="color: black" th:text="${vm.getLayoutHeaderAdminVM().getUserName()}" id="language" aria-haspopup="true" aria-expanded="true"></a>
+                </div>
+
+                <div style="margin-right: 8px" class="user-area dropdown float-right">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img class="user-avatar rounded-circle" th:src="${vm.getLayoutHeaderAdminVM().getAvatar()}" alt="User Avatar">
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </header><!-- /header -->
+    <!-- Header-->
+
+    <div class="breadcrumbs">
+        <div class="col-sm-4">
+            <div class="page-header float-left">
+                <div class="page-title">
+                    <h1>Dashboard</h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-8">
+            <div class="page-header float-right">
+                <div class="page-title">
+                    <ol class="breadcrumb text-right">
+                        <li><a th:href="${'/admin'}">Dashboard</a></li>
+                        <li class="active">Quản lý tin tức</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-body">
+        <button id="new-news" data-toggle="modal" data-target="#mediumModal" style="background-color: #6c757d; color: white" type="button" class="btn btn-outline-secondary"><i class="fa fa-plus"></i>&nbsp; Thêm mới</button>
+    </div>
+
+    <div class="content mt-3">
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2 th:text="${vm.getKeyWord()}"></h2> <br>
+                    <div class="card">
+                        <div class="card-header">
+                            <strong class="card-title">Bảng dữ liệu</strong>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th scope="col">STT</th>
+                                    <th style="text-align: center; width: 200px" scope="col">Tiêu đề</th>
+                                    <th style="text-align: center" scope="col">Ảnh</th>
+                                    <th style="text-align: center; width: 280px" scope="col">Mô tả</th>
+                                    <th style="text-align: center" scope="col">Tác giả</th>
+                                    <th style="width: 120px" scope="col">Ngày tạo</th>
+                                    <th style="width: 60px"  scope="col"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="news : ${vm.getNewsVMList()}">
+                                    <th scope="row" th:text="${news.getNewsId()}"></th>
+                                    <td style="width: 170px" th:text="${news.getTitle()}"></td>
+                                    <td style="text-align: center">
+                                        <img th:src="${news.getMainImage()}" alt="" width="100px" height="100px">
+                                    </td>
+                                    <td th:text="${news.getShortDesc()}"></td>
+                                    <td style="text-align: center" th:text="${news.getAuthor()}"></td>
+                                    <td th:text="${news.getCreatedDate()}"></td>
+                                    <td>
+                                        <a data-toggle="modal" data-target="#mediumModal" th:attr="data-news = ${news.getNewsId()}" class="edit-news"><i class="fa fa-cog"></i></a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- .animated -->
+        <nav style="margin-top: 50px" aria-label="..." th:if="${vm.getNewsVMList().size()>0}">
+            <ul class="pagination">
+                <th:block th:each="i: ${#numbers.sequence(0, page.totalPages - 1)}">
+                    <li class="page-item active" th:if="${page.number == i}" aria-current="page">
+                        <a class="page-link" th:href="${''}" th:text="${i+1}"><span class="sr-only"></span></a>
+                    </li>
+                    <li class="page-item"  th:unless="${page.number == i}"><a class="page-link" th:text="${i+1}"
+                                                                              th:href="${'?'
+                                                                                       +('&page='+i)
+                                                                                       +(#httpServletRequest.getParameter('size')==null?'':('&size='+#httpServletRequest.getParameter('size')))
+                                                                                       +(#httpServletRequest.getParameter('name')==null?'':('&name='+#httpServletRequest.getParameter('name')))}"></a></li>
+                </th:block>
+            </ul>
+        </nav>
+    </div><!-- .content -->
+
+</div><!-- /#right-panel -->
+
+<div class="modal fade" id="mediumModal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content" style="width: 600px; margin-left: 150px">
+            <div class="modal-header">
+                <h4 class="modal-title" id="mediumModalLabel">Thêm/Sửa Tin Tức</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div style="text-align: center">
+                    <img style="max-width: 200px; height: auto" src="https://www.vietnamprintpack.com/images/default.jpg" class="news-main-image">
+                </div>
+
+                <div style="text-align: center; margin-top: 20px; margin-left: 20px">
+                    <input type='file'  id="change-news-mainImage"/>
+                </div>
+
+                <div class="form-group margin-bottom-15" style="margin-top: 20px">
+                    <label>Tiêu đề:</label>
+                    <input type="text" class="form-control" id="input-news-title" placeholder="Tiêu đề">
+                </div>
+
+                <div class="form-group margin-bottom-15" style="width: 100%">
+                    <label>Mô tả:</label>
+                    <input type="text" class="form-control" style="display: block; margin: 5px ;width: 100%" id="input-news-desc" placeholder="Mô tả">
+                </div>
+
+                <div class="form-group margin-bottom-15">
+                    <label>Nội dung:</label>
+                    <textarea type="text" class="form-control" id="input-news-content" placeholder="Nội dung"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Tin nóng?</label>
+                    <select class="form-control" id="input-news-isHot">
+                        <option value="0">Không</option>
+                        <option value="1">Có</option>
+                    </select>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button style="background-color: #0a6ebd; color: white" type="button" class="btn btn-primary btn-save-news">Lưu thay đổi</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Right Panel -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.9.0/sweetalert2.all.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+
+<script th:src="@{/vendors/jquery/dist/jquery.min.js}"></script>
+<script th:src="@{/vendors/popper.js/dist/umd/popper.min.js}"></script>
+<script th:src="@{/vendors/bootstrap/dist/js/bootstrap.min.js}"></script>
+<script th:src="@{/assets/js/main.js}"></script>
+<script th:src="@{/js/admin-news.js}"></script>
+
+
+<script th:src="@{/vendors/chart.js/dist/Chart.bundle.min.js}"></script>
+<script th:src="@{/assets/js/dashboard.js}"></script>
+<script th:src="@{/assets/js/widgets.js}"></script>
+<script th:src="@{/vendors/jqvmap/dist/jquery.vmap.min.js}"></script>
+<script th:src="@{/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js}"></script>
+<script th:src="@{/vendors/jqvmap/dist/maps/jquery.vmap.world.js}"></script>
+<script>
+    (function($) {
+        "use strict";
+
+        jQuery('#vmap').vectorMap({
+            map: 'world_en',
+            backgroundColor: null,
+            color: '#ffffff',
+            hoverOpacity: 0.7,
+            selectedColor: '#1de9b6',
+            enableZoom: true,
+            showTooltip: true,
+            values: sample_data,
+            scaleColors: ['#1de9b6', '#03a9f5'],
+            normalizeFunction: 'polynomial'
+        });
+    })(jQuery);
+</script>
+
+</body>
+
+</html>
