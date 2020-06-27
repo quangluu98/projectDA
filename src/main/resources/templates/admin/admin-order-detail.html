@@ -21,6 +21,7 @@
 
 
     <link rel="stylesheet" th:href="@{/assets/css/style.css}">
+    <link th:href="@{/css/print.css}" rel="stylesheet" />
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
@@ -31,8 +32,8 @@
 
 <!-- Left Panel -->
 
-<aside id="left-panel" class="left-panel">
-    <nav class="navbar navbar-expand-sm navbar-default">
+<aside id="left-panel" class="left-panel no-print">
+    <nav class="navbar navbar-expand-sm navbar-default ">
 
         <div class="navbar-header">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
@@ -71,7 +72,7 @@
 
 <!-- Right Panel -->
 
-<div id="right-panel" class="right-panel">
+<div id="right-panel" class="right-panel no-print">
 
     <!-- Header-->
     <header id="header" class="header">
@@ -118,6 +119,10 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="card-body">
+        <button onclick="myFunction()" style="background-color: #6c757d; color: white" type="button" class="btn btn-outline-secondary"><i class="fa fa-print"></i>  In Hóa Đơn</button>
     </div>
 
     <div class="content mt-3">
@@ -170,6 +175,99 @@
 
 </div><!-- /#right-panel -->
 
+<div class=" lienhe no-print1">
+    <div class="print-col-50">
+        <div class="print-col-30">
+            <img src="https://png.pngtree.com/template/20190910/ourlarge/pngtree-furniture-logo-design-template-symbol-and-icon-of-chairs-sofas-tables-image_305364.jpg" alt="" width="400" height="300">
+        </div>
+        <div class="print-col-40">
+            <b class="titleName">CỬA HÀNG NỘI THẤT SUFEE</b> <br>
+            <b>Địa chỉ: </b>
+            <span>Đại học GTVT - Số 3 phố Cầu Giấy</span><br>
+            <b>Số điện thoại: </b> <span>0985883475</span><br>
+            <b>Email: </b> <span>sufee@gmail.com</span><br>
+            <b>Ngày lập: </b> <span th:text="${vm.getInfoCustomerVM().getDate()}"></span><br>
+            <b>Giờ lập:</b> <span th:text="${vm.getInfoCustomerVM().getTime()}"></span>
+        </div>
+    </div>
+
+    <div class="orderTitle">
+    </div>
+    <div class="infoCustomer">
+        <div class="infoCustomer1">
+            <span class="titlePrint">Hóa Đơn Bán Hàng</span> <br>
+            <b class="orderCode">Số Hóa Đơn: </b> <span th:text="${vm.getInfoCustomerVM().getId()}"></span>
+        </div>
+
+    </div>
+    <div class="print-col-100">
+        <div class="info">
+            <b>Tên khách hàng: </b> <span th:text="${vm.getInfoCustomerVM().getName()}"></span><br>
+            <b>Số điện thoại: </b> <span th:text="${vm.getInfoCustomerVM().getNumberPhone()}"></span><br>
+        </div>
+        <div class="info">
+            <b>Địa chỉ: </b> <span th:text="${vm.getInfoCustomerVM().getAddress()}"></span><br>
+            <b>Email: </b> <span th:text="${vm.getInfoCustomerVM().getEmail()}"></span><br>
+        </div>
+    </div>
+</div>
+
+<div class="card-body no-print1">
+    <div class="table-responsive" >
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+            <tr>
+                <th scope="col">STT</th>
+                <th style="text-align: center" scope="col">Tên sản phẩm</th>
+                <th style="width: 150px" scope="col">Đơn giá</th>
+                <th style="width: 100px"  scope="col">Số lượng</th>
+                <th style="width: 140px; text-align: center;"  scope="col">Thành tiền</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item,iter : ${vm.getOrderProductVMList()}">
+                <th scope="row" th:text="${iter.index+1}"></th>
+                <td style="text-align: center" th:text="${item.getProductName()}"></td>
+                <td th:text="${item.getPriceProduct()} + ' VNĐ'"></td>
+                <td style="text-align: center" th:text="${item.getAmount()}"></td>
+                <td style="text-align: center;" th:text="${item.getPrice()} + ' VNĐ'"></td>
+            </tr>
+            <tr>
+                <th colspan="4">Tổng:</th>
+                <th style="width: 200px;text-align: center;" scope="col"  th:text="${vm.getTotal()} + ' VNĐ'"></th>
+            </tr>
+            <tr>
+                <th colspan="4">Giảm Giá:</th>
+                <th style="width: 200px;text-align: center;" scope="col"  th:text="'-' + ${vm.getSale()} + ' VNĐ'"></th>
+            </tr>
+            <tr>
+                <th colspan="4">Phí Ship:</th>
+                <th style="width: 200px;text-align: center;" scope="col"  th:text="${vm.getShip()} + ' VNĐ'"></th>
+            </tr>
+            <tr>
+                <th colspan="4">Phải Trả:</th>
+                <th style="width: 200px;text-align: center;" scope="col"  th:text="${vm.getPay()} + ' VNĐ'"></th>
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="print-col-50">
+            <div class="print-col-30" style="margin-left: 40px">
+                <b>Người nhận hàng</b> <br>
+                <i>( Ký, ghi rõ họ tên )</i>
+            </div>
+            <div class="print-col-30" style="margin-left: 40px">
+                <b>Người vận chuyển</b> <br>
+                <i>( Ký, ghi rõ họ tên )</i>
+            </div>
+            <div class="print-col-30">
+                <b>Người lập đơn</b> <br>
+                <i>( Ký, ghi rõ họ tên )</i>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Right Panel -->
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
@@ -206,6 +304,12 @@
             normalizeFunction: 'polynomial'
         });
     })(jQuery);
+</script>
+
+<script>
+    function myFunction() {
+        window.print();
+    }
 </script>
 
 </body>

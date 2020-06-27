@@ -9,6 +9,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 public interface StatusRepository extends JpaRepository<Status, Integer> {
-    @Query("SELECT o FROM dbo_order o WHERE (:statusId IS NULL OR (o.statusId = :statusId))")
-    Page<Order> getListOrderByStatusId(Pageable pageable, @Param("statusId") Integer statusId );
+    @Query("SELECT o FROM dbo_order o WHERE (:statusId IS NULL OR (o.statusId = :statusId)) AND (:id IS NULL OR (o.id = :id))")
+    Page<Order> getListOrderByStatusId(Pageable pageable, @Param("statusId") Integer statusId, @Param("id") Integer id );
 }

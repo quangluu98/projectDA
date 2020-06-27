@@ -12,19 +12,11 @@ public class Comment {
     @Id
     private int id;
 
-    @Column(name = "product_id" , insertable = false, updatable = false)
+    @Column(name = "product_id")
     private int productId;
 
-    @ManyToOne(optional = true, fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id")
-    private Product productCommnet;
-
-    @Column(name = "user_id" , insertable = false, updatable = false)
+    @Column(name = "user_id")
     private int userId;
-
-    @ManyToOne(optional = true, fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
 
     @Column(name = "content")
     private String content;
@@ -48,28 +40,12 @@ public class Comment {
         this.productId = productId;
     }
 
-    public Product getProduct() {
-        return productCommnet;
-    }
-
-    public void setProduct(Product productCommnet) {
-        this.productCommnet = productCommnet;
-    }
-
     public int getUserId() {
         return userId;
     }
 
     public void setUserId(int userId) {
         this.userId = userId;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public String getContent() {

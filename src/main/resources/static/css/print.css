@@ -1,0 +1,144 @@
+/** {*/
+/*    max-width: 100%;*/
+/*    margin: 0 auto;*/
+/*}*/
+
+
+.print-col-50 {
+    /*background-color: pink;*/
+    width: 60%;
+    float: left;
+    margin-top: 20px;
+}
+
+.no-print {
+    display: block;
+}
+
+.no-print1 {
+    display: none;
+}
+
+@media print {
+    * {
+        background-color: #FFFFFF;
+    }
+
+    .print-col-50 {
+        width: 100%;
+        float: left;
+        margin-top: 20px;
+    }
+
+    .print-col-20 {
+        width: 20%;
+        float: left;
+        margin-left: 15px;
+    }
+
+    .print-col-30 {
+        width: 30%;
+        float: left;
+        margin-left: 15px;
+    }
+
+    .print-col-100 {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .info {
+        width: 50%;
+        float: left;
+    }
+
+    .print-col-40 {
+        width: 50%;
+        float: right;
+        margin-right: 60px;
+        margin-top: 50px;
+        text-align: right;
+    }
+
+    .infoCustomer {
+        width: 70%;
+        float: left;
+        margin-left: 15px;
+        margin-bottom: 20px;
+        /*background-color: pink;*/
+    }
+
+    .no-print {
+        display: none;
+    }
+
+    #left-panel{
+        display: none;
+    }
+
+    .no-print1 {
+        display: block;
+    }
+
+    .orderTitle {
+        margin-top: 180px;
+    }
+
+    .lienhe {
+        margin-top: -120px;
+        margin-left: 13px;
+    }
+    .infoCustomer1 {
+        margin-left: 380px;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .infoCustomer2{
+        margin-top: -30px;
+    }
+
+    .orderCode {
+        margin-left: 70px;
+    }
+
+    footer {
+        display: none;
+    }
+
+    .titlePrint {
+        font-family: Arial Black Gadget;
+        font-weight: bold;
+        font-size: 30px;
+        text-align: center;
+    }
+
+    .number-order {
+        margin-left: 10px;
+    }
+
+    .titleName{
+        font-size: 40px;
+    }
+}
+
+.print-col-20 {
+    width: 20%;
+    float: left;
+    margin-left: 15px;
+}
+
+
+.print-col-40 {
+    width: 60%;
+    float: right;
+    margin-right: 60px;
+}
+
+
+.infoCustomer {
+    width: 40%;
+    float: left;
+    margin-left: 15px;
+    margin-bottom: 20px;
+}

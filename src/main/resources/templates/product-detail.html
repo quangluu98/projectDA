@@ -88,39 +88,40 @@
         </div>
     </div>
 
-<!--    <div id="colorlib-subscribe" data-stellar-background-ratio="0.5" style="background-color: rgba(255,255,255,0.15); padding: 20px 0; margin-left: 20px">-->
-<!--        <div class="row">-->
-<!--            <form class="form-inline qbstp-header-subscribe">-->
-<!--                <div class="row">-->
-<!--                    <div class="col-md-12 col-md-offset-0">-->
-<!--                        <p style="color: black; font-weight: bold; font-size: 20px">Nhận xét: </p>-->
-<!--                        <div class="form-group">-->
-<!--                            <input type="text" class="form-control" id="key-word" placeholder="Bạn thấy sao về sản phẩm này?">-->
-<!--                            <button type="button" th:attr="data-product=${vm.getProductVM().getId()}" style="color: black" class="btn btn-primary add-comment">Phản hồi</button>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </form>-->
-<!--        </div>-->
-<!--    </div>-->
+    <div id="colorlib-subscribe" data-stellar-background-ratio="0.5" style="background-color: rgba(255,255,255,0.15); padding: 20px 0; margin-left: 20px">
+        <div class="row">
+            <form class="form-inline qbstp-header-subscribe">
+                <div class="row">
+                    <div class="col-md-12 col-md-offset-0">
+                        <p style="color: black; font-weight: bold; font-size: 20px">Nhận xét: </p>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="key-word" placeholder="Bạn thấy sao về sản phẩm này?">
+                            <button type="button" th:attr="data-product=${vm.getProductVM().getId()}" style="color: black" class="btn btn-primary add-comment">Phản hồi</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 
-<!--    <th:block th:each=" cmt : ${vm.getCommentVMList()}">-->
-<!--        <div id="colorlib-blog" style="padding: 20px 0; margin-top: -30px; margin-left: 50px; margin-bottom: -70px">-->
-<!--            <div class="blog-flex">-->
-<!--                <div class="blog-entry aside-stretch-right" style="padding: 20px 0">-->
-<!--                    <img th:src="${cmt.getAvatar()}" alt="" style="height: 50px; width: 50px; border-radius: 30px">-->
-<!--                    <a href="#" class="blog-post" style="margin-top: -50px">-->
-<!--                        <div class="desc" style="margin-left: -30px">-->
-<!--                            <span class="cat" th:text="${cmt.getUsername()} + ' - '"></span>-->
-<!--                            <span class="date" th:text="${cmt.getCreatedDate()}"></span>-->
-<!--                            <span th:if="${cmt.getRoleId() == 1} or ${cmt.getRoleId() == 3}" style="border: 1px solid #FFDD00; background-color: #FFDD00; border-radius: 20px; padding: 0 3px">Quản trị viên</span>-->
-<!--                            <h4 th:text="${cmt.getContent()}"></h4>-->
-<!--                        </div>-->
-<!--                    </a>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </th:block>-->
+    <th:block th:each=" cmt : ${vm.getCommentVMList()}">
+        <div id="colorlib-blog" style="padding: 20px 0; margin-top: -30px; margin-left: 50px; margin-bottom: -70px">
+            <div class="blog-flex">
+                <div class="blog-entry aside-stretch-right" style="padding: 20px 0">
+                    <img th:src="${cmt.getAvatar()}" alt="" style="height: 50px; width: 50px; border-radius: 30px">
+                    <a href="#" class="blog-post" style="margin-top: -50px">
+                        <div class="desc" style="margin-left: -30px">
+                            <span class="cat" th:text="${cmt.getUsername()} + ' - '"></span>
+                            <span class="date" th:text="${cmt.getCreatedDate()}"></span>
+                            <span th:if="${cmt.getRoleId() == 1} or ${cmt.getRoleId() == 3}" style="border: 1px solid #FFDD00; background-color: #FFDD00; border-radius: 20px; padding: 0 3px">Quản trị viên</span>
+                            <span th:if="${cmt.getIsBuy() == 1}" style="border: 1px solid #5cb85c; background-color: #5cb85c; border-radius: 20px; padding: 2px 5px; color: white;">Đã mua</span>
+                            <h4 th:text="${cmt.getContent()}"></h4>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </th:block>
 </div>
 <div id="page">
     <div id="colorlib-hotel">

@@ -27,8 +27,8 @@ public class StatusService {
         return statusRepository.findOne(statusId);
     }
 
-    public Page<Order> getListOrderByStatusId(Pageable pageable, Integer statusId) {
-        return statusRepository.getListOrderByStatusId(pageable,statusId);
+    public Page<Order> getListOrderByStatusId(Pageable pageable, Integer statusId, Integer id) {
+        return statusRepository.getListOrderByStatusId(pageable,statusId, id);
     }
 
     public List<Status> getListAllStatus() {

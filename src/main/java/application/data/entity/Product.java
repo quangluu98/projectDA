@@ -23,9 +23,6 @@ public class Product {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
     private List<ProductImage> productImageList = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productCommnet")
-    private List<Comment> commentList = new ArrayList<>();
-
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
     private List<OrderProduct> orderProductList = new ArrayList<>();
 
@@ -147,13 +144,5 @@ public class Product {
 
     public void setAmount(int amount) {
         this.amount = amount;
-    }
-
-    public List<Comment> getCommentList() {
-        return commentList;
-    }
-
-    public void setCommentList(List<Comment> commentList) {
-        this.commentList = commentList;
     }
 }

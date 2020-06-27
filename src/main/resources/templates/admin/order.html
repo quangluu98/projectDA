@@ -80,6 +80,15 @@
 
             <div class="col-sm-7">
                 <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>
+                <div class="header-left">
+                    <button class="search-trigger" ><i class="fa fa-search" ></i></button>
+                    <div class="form-inline">
+                        <form class="search-form" th:action="@{'/admin/order'}" th:object="${orderVMSearch}" method="get">
+                            <input th:field="*{id}" class="form-control mr-sm-2" type="text" placeholder="Nhập từ khóa tìm kiếm ..." aria-label="Search">
+                            <button type="submit"><i class="fa fa-close"></i></button>
+                        </form>
+                    </div>
+                </div>
             </div>
 
             <div class="col-sm-5">
@@ -161,7 +170,7 @@
                                 </thead>
                                 <tbody>
                                 <tr th:each="order,iter : ${vm.getOrderVMList()}">
-                                    <th scope="row" th:text="${iter.index + 1}"></th>
+                                    <th scope="row" th:text="${order.getId()}"></th>
                                     <td th:text="${order.getCustomerName()}"></td>
                                     <td style="text-align: center" th:text="${order.getEmail()}"></td>
                                     <td th:text="${order.getAddress()}"></td>
@@ -171,10 +180,11 @@
                                     <td th:text="${order.getStatus()}"></td>
                                     <td style="text-align: center" th:text="${order.getShipName()}"></td>
                                     <td>
-                                        <a th:if="${order.getStatus() == 'Chưa xử lý'} and ${vm.getRoleId() == 4}" style="color: green" th:attr="data-accept = ${order.getId()}" class="accept-order"><i class="fa fa-check"></i></a>
-                                        <a th:if="${order.getStatus() == 'Chưa xử lý'} and (${vm.getRoleId() == 1} or ${vm.getRoleId() == 3})" style="color: red" th:attr="data-remove = ${order.getId()}" class="remove-order"><i class="fa fa-times"></i></a>
-                                        <a th:if="${vm.getRoleId() == 1} or ${vm.getRoleId() == 3}" data-toggle="modal" data-target="#mediumModal" th:attr="data-order = ${order.getId()}" class="edit-order"><i class="fa fa-cog"></i></a>
-                                        <a th:href="${'/admin/history/' + order.getId()}" style="color: #0a6ebd"><i class="fa fa-info-circle"></i></a>
+                                        <a th:if="${order.getStatus() == 'Chưa xử lý'} and ${vm.getRoleId() == 4}" style="color: green" th:attr="data-accept = ${order.getId()}" class="accept-order"><i class="fa fa-check" title="Nhận đơn"></i></a>
+                                        <a th:if="${order.getStatus() == 'Chưa xử lý'} and (${vm.getRoleId() == 1} or ${vm.getRoleId() == 3})" style="color: red" th:attr="data-remove = ${order.getId()}" class="remove-order" title="Hủy đơn"><i class="fa fa-times"></i></a>
+                                        <a th:if="${vm.getRoleId() == 1} or ${vm.getRoleId() == 3}" data-toggle="modal" data-target="#mediumModal" th:attr="data-order = ${order.getId()}" class="edit-order" title="Sửa"><i class="fa fa-cog"></i></a>
+                                        <a th:href="${'/admin/history/' + order.getId()}" style="color: #0a6ebd" title="Xem chi tiết"><i class="fa fa-info-circle"></i></a>
+                                        <a th:if="${order.getStatus() == 'Bị hủy'}  or${order.getStatus() == 'Bị trả lại'}" th:attr="data-order = ${order.getId()}" class="delete-order" title="Xóa" style="color: red"><i class="fa fa-times-rectangle"></i></a>
                                     </td>
                                 </tr>
                                 </tbody>

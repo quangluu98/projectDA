@@ -40,4 +40,14 @@ public class OrderService {
         return orderRepository.getTotalPriceInMonthOfYear2020();
     }
 
+    public boolean deleteOrder(int id) {
+        try {
+            orderRepository.delete(id);
+            return true;
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+        }
+        return false;
+    }
+
 }

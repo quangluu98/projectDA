@@ -16,4 +16,5 @@ public class CommentVM {
     private String avatar;
     private String createdDate;
     private int roleId;
+    private int isBuy;
 }

@@ -17,4 +17,8 @@ public class AdminOrderDetailVM {
     private int roleId;
     private String promotion;
     private String pay;
+    private InfoCustomerVM infoCustomerVM;
+    private String sale;
+    private String total;
+    private String ship;
 }

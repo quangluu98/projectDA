@@ -10,6 +10,7 @@ import application.data.service.StatusService;
 import application.data.service.UserService;
 import application.model.api.BaseApiResult;
 import application.model.api.DataApiResult;
+import application.model.dto.CartProductDTO;
 import application.model.dto.OrderDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -163,6 +164,24 @@ public class OrderApiController {
             result.setMessage(e.getMessage());
         }
 
+        return result;
+    }
+
+    @PostMapping("/delete")
+    public BaseApiResult deleteOrder(@RequestBody OrderDTO dto) {
+        BaseApiResult result = new BaseApiResult();
+
+        try {
+            if (orderService.deleteOrder(dto.getId()) == true) {
+
+                result.setMessage("Xóa Thành Công");
+                result.setSuccess(true);
+                return result;
+            }
+        } catch (Exception e) {
+            result.setSuccess(false);
+            result.setMessage("Lỗi!");
+        }
         return result;
     }
 }

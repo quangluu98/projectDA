@@ -11,8 +11,10 @@ import application.data.service.UserRoleService;
 import application.data.service.UserService;
 import application.model.viewmodel.admin.AdminOrderDetailVM;
 import application.model.viewmodel.admin.AdminProductVM;
+import application.model.viewmodel.admin.InfoCustomerVM;
 import application.model.viewmodel.order.OrderProductVM;
 import application.model.viewmodel.order.OrderVM;
+import application.model.viewmodel.product.ProductVM;
 import application.model.viewmodel.status.StatusVM;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,13 +23,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -49,6 +51,7 @@ public class OrderAdminController extends BaseController {
     @GetMapping("order")
     public String order(Model model,
                         HttpServletRequest request,
+                        @Valid @ModelAttribute("orderVMSearch") OrderVM orderVMSearch,
                         @RequestParam(name = "statusId", required = false) Integer statusId,
                         @RequestParam(name = "page", required = false, defaultValue = "0") Integer page,
                         @RequestParam(name = "size", required = false, defaultValue = "5") Integer size) {
@@ -86,11 +89,13 @@ public class OrderAdminController extends BaseController {
         Page<Order> orderPage = null;
 
         if(statusId != null ) {
-            orderPage = statusService.getListOrderByStatusId(pageable, statusId);
+            orderPage = statusService.getListOrderByStatusId(pageable, statusId, null);
             Status status = statusService.findOne(statusId);
             vm.setKeyWord("Hóa đơn có trạng thái: " + status.getName());
-        }else {
-            orderPage = statusService.getListOrderByStatusId(pageable, null);
+        } else if(orderVMSearch.getId() > 0) {
+            orderPage = statusService.getListOrderByStatusId(pageable, null, orderVMSearch.getId());
+        } else {
+            orderPage = statusService.getListOrderByStatusId(pageable, null, null);
         }
 
         List<OrderVM> orderVMList = new ArrayList<>();
@@ -150,8 +155,21 @@ public class OrderAdminController extends BaseController {
         List<OrderProductVM> orderProductVMList = new ArrayList<>();
 
         Order order = orderService.findOne(orderId);
+        SimpleDateFormat formatterDate = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat formatterTime = new SimpleDateFormat("HH:mm:ss");
+
+        InfoCustomerVM infoCustomerVM = new InfoCustomerVM();
+        infoCustomerVM.setId(orderId);
+        infoCustomerVM.setAddress(order.getAddress());
+        infoCustomerVM.setEmail(order.getEmail());
+        infoCustomerVM.setName(order.getCustomerName());
+        infoCustomerVM.setNumberPhone(order.getPhoneNumber());
+        infoCustomerVM.setDate(formatterDate.format(new Date()));
+        infoCustomerVM.setTime(formatterTime.format(new Date()));
+
         double totalPrice = 0;
         String pay = null;
+        String sale = null;
 
         if(order != null) {
             for(OrderProduct orderProduct : order.getListProductOrders()) {
@@ -168,12 +186,17 @@ public class OrderAdminController extends BaseController {
             }
 
             pay = FormatPrice.formatPrice(order.getPrice());
+            sale = FormatPrice.formatPrice(totalPrice - order.getPrice() + 200000);
         }
 
         vm.setLayoutHeaderAdminVM(this.getLayoutHeaderAdminVM(request));
         vm.setOrderProductVMList(orderProductVMList);
         vm.setPay(pay);
         vm.setPromotion("(Hóa đơn này được khuyến mại " + order.getPromotion() + ")");
+        vm.setInfoCustomerVM(infoCustomerVM);
+        vm.setTotal(FormatPrice.formatPrice(totalPrice));
+        vm.setSale(sale);
+        vm.setShip(FormatPrice.formatPrice((double) 200000));
 
         model.addAttribute("vm", vm);
 

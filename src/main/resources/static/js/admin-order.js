@@ -130,4 +130,37 @@ $(document).ready(function() {
             );
         })
     });
+
+    $(".delete-order").on("click",function(){
+        var pdInfo = $(this).data("order");
+        dataOrder.id = pdInfo;
+
+        NProgress.start();
+        var linkGet = "/api/order/delete";
+        axios.post(linkGet, dataOrder).then(function(res){
+            NProgress.done();
+            if(res.data.success) {
+                swal(
+                    'Thành Công',
+                    res.data.message,
+                    'success'
+                ).then(function() {
+                    location.reload();
+                });
+            } else {
+                swal(
+                    'Lỗi',
+                    res.data.message,
+                    'error'
+                );
+            }
+        }, function(err){
+            NProgress.done();
+            swal(
+                'Lỗi',
+                'Lỗi',
+                'error'
+            );
+        });
+    });
 });

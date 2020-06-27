@@ -4,10 +4,7 @@ import application.constant.DateConstant;
 import application.constant.FormatPrice;
 import application.constant.RoleIdConstant;
 import application.data.entity.*;
-import application.data.service.CategoryService;
-import application.data.service.ProductService;
-import application.data.service.UserRoleService;
-import application.data.service.UserService;
+import application.data.service.*;
 import application.model.viewmodel.category.CategoryVM;
 import application.model.viewmodel.producimage.ProductImageVM;
 import application.model.viewmodel.product.ProductLanding;
@@ -46,6 +43,12 @@ public class ProductController extends BaseController {
 
     @Autowired
     private UserRoleService userRoleService;
+
+    @Autowired
+    private CommentService commentService;
+
+    @Autowired
+    private OrderService orderService;
 
     @GetMapping(path = "")
     public String product(Model model,
@@ -175,35 +178,42 @@ public class ProductController extends BaseController {
         }
 
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        User user = userService.findUserByUsername(username);
+        User userLogin = userService.findUserByUsername(username);
 
         List<CommentVM> commentVMList = new ArrayList<>();
-        Product pro = productService.findOne(productId);
-        for(Comment comment : pro.getCommentList()) {
+        List<Comment> commentList = commentService.getListCommentByProductId(productId);
+        for(Comment comment : commentList) {
             CommentVM commentVM = new CommentVM();
 
-            if(comment.getUser() == null) {
-                commentVM.setAvatar("https://img.favpng.com/7/5/8/computer-icons-font-awesome-user-font-png-favpng-YMnbqNubA7zBmfa13MK8WdWs8.jpg");
+            if(comment.getUserId() == 0) {
+                commentVM.setAvatar("https://cdn1.iconfinder.com/data/icons/social-messaging-productivity-1-1/128/gender-male2-512.png");
                 commentVM.setUsername("No Name");
             } else {
-                if(comment.getUser().getAvatar() != null) {
-                    commentVM.setAvatar(comment.getUser().getAvatar());
+                User user = userService.findOne(comment.getUserId());
+                if(user.getAvatar() != null) {
+                    commentVM.setAvatar(user.getAvatar());
                 }else {
                     commentVM.setAvatar("https://img.favpng.com/7/5/8/computer-icons-font-awesome-user-font-png-favpng-YMnbqNubA7zBmfa13MK8WdWs8.jpg");
                 }
-                commentVM.setUsername(comment.getUser().getUserName());
+                commentVM.setUsername(user.getUserName());
             }
-//            commentVM.setId(comment.getId());
+            commentVM.setId(comment.getId());
             commentVM.setContent(comment.getContent());
             commentVM.setCreatedDate(DateConstant.formatDate(comment.getCreatedDate()));
 
-            UserRole userRole1 = userRoleService.findUserRolebyRoleIdAndUserId(RoleIdConstant.Role_Admin, comment.getUser().getId());
-            UserRole userRole2 = userRoleService.findUserRolebyRoleIdAndUserId(RoleIdConstant.Role_Supporter, comment.getUser().getId());
+            UserRole userRole1 = userRoleService.findUserRolebyRoleIdAndUserId(RoleIdConstant.Role_Admin, comment.getUserId());
+            UserRole userRole2 = userRoleService.findUserRolebyRoleIdAndUserId(RoleIdConstant.Role_Supporter, comment.getUserId());
             if(userRole1 != null) {
                 commentVM.setRoleId(RoleIdConstant.Role_Admin);
             }
             if(userRole2 != null) {
                 commentVM.setRoleId(RoleIdConstant.Role_Supporter);
+            }
+            if(comment.getUserId() != 0 && userRole1 == null && userRole2 == null ) {
+                List<Order> orderList = orderService.findOrderByGuidOrUserName(null, userService.findOne(comment.getUserId()).getUserName());
+                if(orderList.size() > 0) {
+                    commentVM.setIsBuy(1);
+                }
             }
 
             commentVMList.add(commentVM);
@@ -215,7 +225,7 @@ public class ProductController extends BaseController {
         vm.setCommentVMList(commentVMList);
 
         model.addAttribute("vm", vm);
-        model.addAttribute("user", user);
+//        model.addAttribute("user", user);
 
         return "product-detail";
     }
