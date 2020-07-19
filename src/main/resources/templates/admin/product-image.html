@@ -146,7 +146,7 @@
                                 <tr th:each="image,iter : ${vm.getProductImageVMList()}">
                                     <th scope="row" th:text="${iter.index + 1}"></th>
                                     <td style="text-align: center">
-                                        <img th:src="${image.getLink()}" alt="" height="100px" width="100px">
+                                        <img th:src="${image.getLink()}" alt="" height="100px" width="200px">
                                     </td>
                                     <td th:text="${image.getCreatedDate()}"></td>
                                     <td th:if="${vm.getRoleId() == 1}">

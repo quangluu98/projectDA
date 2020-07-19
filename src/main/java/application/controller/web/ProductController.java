@@ -153,6 +153,7 @@ public class ProductController extends BaseController {
             productVM.setMainImage(product.getMainImage());
             productVM.setShortDesc(product.getShortDesc());
             productVM.setPrice(FormatPrice.formatPrice(product.getPrice()));
+            productVM.setAmount(product.getAmount());
         }
         List<ProductImageVM> productImageVMS = new ArrayList<>();
         for(ProductImage productImage : product.getProductImageList()) {

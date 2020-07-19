@@ -40,23 +40,23 @@
                     <img src="https://png.pngtree.com/template/20190910/ourlarge/pngtree-furniture-logo-design-template-symbol-and-icon-of-chairs-sofas-tables-image_305364.jpg" width="150" height="150" >
                 </span>
 
-                <div th:if="${param.success}">
-                    <div class="form-alert-success" >
+                <div style="margin-top: -50px" th:if="${param.success}">
+                    <div class="form-alert-success" style="margin-bottom: 40px">
                         Đăng kí thành công!!
                     </div>
                 </div>
-                <div th:if="${param.fail}">
-                    <div class="form-alert-fail">
+                <div style="margin-top: -50px" th:if="${param.fail}">
+                    <div class="form-alert-fail" style="margin-bottom: 40px">
                         Đăng kí bị lỗi!!!
                     </div>
                 </div>
-                <div th:if="${param.invalidUserName}">
-                    <div class="form-alert-fail" >
+                <div style="margin-top: -50px" th:if="${param.invalidUserName}">
+                    <div class="form-alert-fail" style="margin-bottom: 40px">
                         Tên đăng nhập bị trùng!!
                     </div>
                 </div>
-                <div th:if="${param.invalidEmail}">
-                    <div class="form-alert-fail" >
+                <div style="margin-top: -50px" th:if="${param.invalidEmail}">
+                    <div class="form-alert-fail" style="margin-bottom: 40px">
                         Email bị trùng!!
                     </div>
                 </div>

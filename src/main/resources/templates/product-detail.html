@@ -57,8 +57,9 @@
             <div class="content">
                 <div class="col-md-8">
                     <h2 style="margin-bottom:30px;" th:text="${vm.getProductVM().getName()}"></h2>
+                    <span th:if="${vm.getProductVM().getAmount() == 0}" style="padding: 5px; background-color: #f4827f; border: 1px solid #f4827f; border-radius: 35px; color: black">Tạm hết hàng</span>
 
-                    <p th:text="'Thuộc nhóm: ' + ${vm.getProductVM().getCategoryName()}"></p>
+                    <p style="margin-top: 10px" th:text="'Thuộc nhóm: ' + ${vm.getProductVM().getCategoryName()}"></p>
                     <p th:text="${vm.getProductVM().getShortDesc()}"></p>
                     <h4>
                         <strong th:text="'Giá: ' + ${vm.getProductVM().getPrice()} + ' VNĐ '"></strong>
@@ -68,7 +69,7 @@
                         <div class="quantity">
                             <span>Số lượng:</span>
                             <button class="plus-btn btn-amout" type="button" name="button">+</button>
-                            <input id="getAmount" style="height: 27px" type="text" name="name" value="1">
+                            <input id="getAmount" style="height: 27px" type="number" name="name" value="1">
                             <button class="minus-btn btn-amout" type="button" name="button">-</button>
                         </div>
                     </div>
@@ -79,6 +80,7 @@
                         <div class="fb-comments" data-href="" data-numposts="5"></div>
                     </div>
                 </div>
+
                 <div class="col-md-12">
                     <a th:attr="data-product=${vm.getProductVM().getId()}" class="add-to-cart btn btn-primary" style="color: black">
                         <span style="color: black; margin-right: 10px" class="glyphicon glyphicon-shopping-cart"></span>Thêm vào giỏ hàng
